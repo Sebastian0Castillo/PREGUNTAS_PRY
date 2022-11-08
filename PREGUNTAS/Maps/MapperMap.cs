@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using PREGUNTAS.Datalayer.DB;
+using PREGUNTAS.DataLayer.DTO.Preguntas;
+using PREGUNTAS.DataLayer.DTO.Respuestas;
 using System.Text;
 
 namespace PREGUNTAS.Maps
@@ -7,9 +10,11 @@ namespace PREGUNTAS.Maps
     {
         public MapperMap()
         {
+            CreateMap<Pregunta, RegPreguntaDto>()
+                .ReverseMap();
 
-                    byte[] salt = Encoding.ASCII.GetBytes(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("Appsettings:UserSaltKey").Value);
-
+            CreateMap<Respuesta, RegRespuestaDto>()
+                .ReverseMap();
         }
     }
 }

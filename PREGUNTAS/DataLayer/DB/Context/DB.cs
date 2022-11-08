@@ -1,5 +1,6 @@
-﻿using PREGUNTAS.DataLayer.DB.Entities.Preguntas_Respuestas;
+﻿
 using Microsoft.EntityFrameworkCore;
+using PREGUNTAS.Datalayer.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,16 @@ using System.Threading.Tasks;
             {
 
             }
-
-            public DbSet<Preguntas> preguntas { get; set; }
-            public DbSet<Respuestas> respuestas { get; set; }
+            public DbSet<Pregunta> preguntas { get; set; }
+            public DbSet<Respuesta> respuestas { get; set; }
 
             protected override void OnModelCreating(ModelBuilder builder)
             {
-                 builder.Entity<Preguntas>().ToTable("preguntas");
-                 builder.Entity<Respuestas>()
+                 builder.Entity<Pregunta>().ToTable("preguntas");
+                 builder.Entity<Respuesta>()
                  .ToTable("Respuestas")
-                 .HasOne(e => e.preguntas)
-                 .WithMany(e => e.respuestas)
+                 .HasOne(e => e.IdPreguntaNavigation)
+                 .WithMany(e => e.id_Respuesta)
                  .OnDelete(DeleteBehavior.Cascade);
         }
         }

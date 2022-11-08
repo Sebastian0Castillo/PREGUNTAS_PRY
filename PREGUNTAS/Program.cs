@@ -21,6 +21,8 @@ builder.Services.AddSingleton<IUtilitiesService, UtilitiesService>();
 
 builder.Services.AddScoped<IpreguntasService, PreguntasService>();
 
+builder.Services.AddScoped<IRespuestasService, RespuestasService>();
+
 builder.Services.AddDbContext<DB>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("Dev"));
@@ -30,7 +32,7 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
