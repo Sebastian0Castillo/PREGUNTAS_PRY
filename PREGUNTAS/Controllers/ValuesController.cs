@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PREGUNTAS.Datalayer.DB;
@@ -24,9 +25,15 @@ namespace PREGUNTAS.Controllers
         }
 
 
-        [HttpGet("Pregunta/{id}")]
+        [HttpGet("Pregunta/{id}"), Authorize(Policy = "Otros")]
         public async Task<Pregunta?> Get(int id)
         {
+            int numero_cambiado = 45;
+
+            Action<int> cambiar_numero = (x) => { x = 1; } ;
+
+            cambiar_numero(numero_cambiado);
+
             return await _preguntasService.GetPreguntas(id);
         }
 
